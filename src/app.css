@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.back-g {
+		@apply flex h-screen w-screen items-center justify-center
+        bg-gradient-to-b from-[#0a2445] from-[75%]  to-[#7e94a7];
+		box-shadow:
+			222px 226px 154px -53px #9497a8,
+			15px -230px 121px 30px #164e6f,
+			129px -191px 161px -51px #164e6f,
+			191px 132px 107px -3px #164e6f,
+			168px -84px 261px -65px #164e6f,
+			-152px 177px 184px -104px #164e6f;
+	}
+	.back-g-shadow {
+		box-shadow:
+			222px 226px 154px -53px #9497a8,
+			15px -230px 121px 30px #164e6f,
+			129px -191px 161px -51px #164e6f,
+			191px 132px 107px -3px #164e6f,
+			168px -84px 261px -65px #164e6f,
+			-152px 177px 184px -104px #164e6f;
+	}
+}

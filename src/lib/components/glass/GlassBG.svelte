@@ -3,13 +3,13 @@
 </script>
 
 {#if size === 'full'}
-	<div class="parent h-full w-full">
+	<div class="parent h-full w-full rounded-3xl back-g-shadow">
 		<div class="main h-full w-full">
 			<slot />
 		</div>
 	</div>
 {:else}
-	<div class="">
+	<div class="rounded-3xl back-g-shadow">
 		<div class="main">
 			<slot />
 		</div>
@@ -21,7 +21,7 @@
         @apply hover:bg-slate-600
     } */
 	.main {
-		@apply relative rounded-3xl border-[2.5px] border-[#2990cd] bg-[#1d6593];
+		@apply relative rounded-3xl border-[2.5px] border-[#2990cd] bg-sky-700;
 	}
 	.main:after {
 		@apply absolute -left-[2.5px] top-1/4 block h-7 w-0;
