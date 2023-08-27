@@ -67,7 +67,7 @@
 >
 	<!-- <div class="h-[25rem] w-[20rem] bg-red-500"> -->
 	<GlassBg size="auto">
-		<h1 class="m-1 mt-3 text-center text-2xl text-white">أنضم إلينا</h1>
+		<h1 class="m-1 mt-3 text-center text-2xl text-white">أنضم ({vall}) إلينا</h1>
 		<form
 	on:keydown={(e)=>{
 		vall = e.key
