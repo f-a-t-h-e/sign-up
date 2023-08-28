@@ -1,7 +1,7 @@
 <script lang="ts">
 	import GlassBg from '$lib/components/glass/GlassBG.svelte';
 	import { beforeUpdate, onMount } from 'svelte';
-	import InputMsg from '$lib/components/InputMsg.svelte';
+	import InputMsg, { type TInputMsgState } from '$lib/components/InputMsg.svelte';
 	import LockSvg from '$lib/components/LockSvg.svelte';
 	import { enhance } from '$app/forms';
 	import UserSvg from '$lib/components/UserSvg.svelte';
@@ -19,29 +19,8 @@
 	const states: TState[] = ['default', 'invalid', 'submitting', 'succeeded', 'failed'];
 	type TState = 'default' | 'invalid' | 'submitting' | 'succeeded' | 'failed';
 	let state: TState = 'default';
-	// let isErr: boolean = false;
 
-	async function submit() {
-		state = 'submitting';
-		/* @todo */
-		// var arNumbers = '٠١٢٣٤٥٦٧٨٩',
-		// 	reg_arNumbers = /^[\u0660-\u0669]{10}$/;
-
-		try {
-			await new Promise((resolve) =>
-				setTimeout(() => {
-					resolve(true);
-				}, 1000)
-			);
-			state = 'succeeded';
-			// redirect is handled from +layout.svelte
-			// goto($page.data.redirect)
-		} catch (error) {
-			console.log(error);
-			state = 'failed';
-			return;
-		}
-	}
+	
 	let novalidate = false;
 	onMount(() => {
 		novalidate = true;
@@ -54,7 +33,6 @@
 			return;
 		}
 	});
-	let vall : string;
 </script>
 
 <svelte:head>
@@ -62,33 +40,22 @@
 	<meta name="description" content="أنشئ حساب و أنضم إلينا الأن" />
 </svelte:head>
 
-<div
-	class="back-g"
->
+<div class="back-g">
 	<!-- <div class="h-[25rem] w-[20rem] bg-red-500"> -->
 	<GlassBg size="auto">
-		<h1 class="m-1 mt-3 text-center text-2xl text-white">أنضم ({vall}) إلينا</h1>
+		<h1 class="m-1 mt-3 text-center text-2xl text-white">أنضم إلينا</h1>
 		<form
-	on:keydown={(e)=>{
-		vall = e.key
-	}}
-
 			class=""
 			{novalidate}
 			method="post"
-			use:enhance={({cancel}) => {
+			use:enhance={({ cancel }) => {
 				state = 'submitting';
 				if (!isNameValid || !isEmailValid || !isPasswordValid) {
 					state = 'invalid';
-					cancel()
-					return;
+					cancel();
 				}
 				return async ({ update, result }) => {
-					// await update();
-					console.log({ result });
-					if (result) {
-						
-					}
+					await update();
 					state = 'succeeded';
 				};
 			}}
@@ -107,11 +74,15 @@
 					/><span><UserSvg /></span></label
 				>
 				<InputMsg
-					show={state!=="default"}
+					show={state !== 'default'}
 					state={!username ? 'warning' : names.length < 1 ? 'bad' : 'good'}
 				>
 					{form?.errors?.username ||
-						(!username ? 'ادخل اسم مستخدم' : names.length < 1 ? 'تأكد من الاسم' : 'هذا جيد')}
+						(!username
+							? 'ادخل اسم مستخدم'
+							: names.length < 1
+							? 'تأكد من الاسم باللغة العربية'
+							: 'هذا جيد')}
 				</InputMsg>
 			</div>
 			<div class="" class:invalid={!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email) && !!email}>
@@ -127,7 +98,7 @@
 					/><span><MailSvg /></span>
 				</label>
 				<InputMsg
-					show={state!=="default"}
+					show={state !== 'default'}
 					state={!email
 						? 'warning'
 						: !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
@@ -157,7 +128,7 @@
 					/><span><LockSvg /></span></label
 				>
 				<InputMsg
-					show={state!=="default"}
+					show={state !== 'default'}
 					state={!password ? 'warning' : !/.{6,50}/.test(password) ? 'bad' : 'good'}
 				>
 					{form?.errors?.password ||

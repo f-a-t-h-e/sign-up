@@ -14,13 +14,17 @@
 			168px -84px 261px -65px #164e6f,
 			-152px 177px 184px -104px #164e6f;
 	}
-	.back-g-shadow {
-		box-shadow:
-			222px 226px 154px -53px #9497a8,
-			15px -230px 121px 30px #164e6f,
-			129px -191px 161px -51px #164e6f,
-			191px 132px 107px -3px #164e6f,
-			168px -84px 261px -65px #164e6f,
-			-152px 177px 184px -104px #164e6f;
+	.back-g-shadow::before {
+		content: '';
+		display: block;
+		position: fixed;
+		height: 200%;
+		top: 50%;
+		left: 59%;
+		width: 13rem;
+		background-color: #44bee48c;
+		filter: blur(100px);
+		transform-origin: center;
+		transform: translateX(-50%) translateY(-50%) rotateZ(-25deg);
 	}
 }

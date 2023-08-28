@@ -1,7 +1,7 @@
-import type { Actions } from '@sveltejs/kit';
+import { redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
-	default: async ({ cookies, locals, request }) => {
+	default: async ({ cookies, locals, request,  }) => {
 		const form = await request.formData();
 		const username = String(form.get('username') || ''),
 			email = String(form.get('email') || ''),
@@ -17,13 +17,10 @@ export const actions = {
 					resolve(true);
 				}, 1000)
 			);
-
         if (isNameValid && isEmailValid && isPasswordValid) {
-            return {
-                success: true
-            }
+			throw redirect(302, "/");
         }
-		return { 
+		return {
             errors: {
                 username: isNameValid ? undefined : "غير هذا الاسم",
                 email: isEmailValid ? undefined : "غير هذا البريد",

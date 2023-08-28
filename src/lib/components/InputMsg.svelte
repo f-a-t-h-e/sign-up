@@ -1,5 +1,8 @@
+<script context="module" lang="ts">
+	export type TInputMsgState =  'pending' | 'warning' | 'good' | 'bad' | 'loading' ;
+</script>
 <script lang="ts">
-	export let state: 'pending' | 'warning' | 'good' | 'bad' | 'loading' = 'pending';
+	export let state : TInputMsgState= 'pending';
 	// const states: ('pending' | 'warning' | 'good' | 'bad' | 'loading')[] = [
 	// 	'pending',
 	// 	'warning',
